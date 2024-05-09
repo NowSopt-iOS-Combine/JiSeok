@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import Combine
 
+import CombineCocoa
 import SnapKit
 
 class LoginViewController: UIViewController {
@@ -113,6 +115,8 @@ class LoginViewController: UIViewController {
         return button
     }()
 
+    private var anyCancellables = Set<AnyCancellable>()
+    private var viewModel = LoginViewModel()
     private var nickname: String? = nil
 
     override func viewDidLoad() {
@@ -122,6 +126,31 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         setLayout()
         setAutoLayout()
+        bind()
+    }
+
+    private func bind() {
+        idTextField
+            .textPublisher
+            .receive(on: RunLoop.main)
+            .map { $0 ?? "" }
+            .assign(to: \.idTextInput, 
+                    on: viewModel)
+            .store(in: &anyCancellables)
+        passwordTextField
+            .textPublisher
+            .receive(on: RunLoop.main)
+            .map { $0 ?? "" }
+            .assign(to: \.passwordTextInput,
+                    on: viewModel)
+            .store(in: &anyCancellables)
+
+        viewModel.isVaild
+            .print()
+            .receive(on: RunLoop.main)
+            .assign(to: \.isEnabled,
+                    on: loginButton)
+            .store(in: &anyCancellables)
     }
 
     private func setLayout() {
