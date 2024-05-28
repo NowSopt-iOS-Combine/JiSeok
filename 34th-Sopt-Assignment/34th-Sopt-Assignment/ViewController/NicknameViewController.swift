@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import Combine
 
+import CombineCocoa
 import SnapKit
 
 protocol NicknameDelegate {
@@ -54,12 +56,15 @@ class NicknameViewController: UIViewController {
     }()
 
     var delegate: NicknameDelegate?
+    let textPublisher = PassthroughSubject<String, Never>()
+    private var anyCancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .tvingWhite
         setLayout()
         setAutoLayout()
+        bind()
     }
 
     private func setLayout() {
@@ -92,6 +97,16 @@ class NicknameViewController: UIViewController {
         }
     }
 
+    func bind() {
+        nicknameTextField
+            .textPublisher
+            .print()
+            .compactMap { $0 }
+            .sink { [weak self] text in
+                self?.textPublisher.send(text)
+            }
+            .store(in: &anyCancellables)
+    }
 }
 
 extension NicknameViewController {

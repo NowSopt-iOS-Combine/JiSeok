@@ -115,9 +115,17 @@ class LoginViewController: UIViewController {
         return button
     }()
 
+    private let changeTextLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        label.textColor = .white
+        return label
+    }()
+
     private var anyCancellables = Set<AnyCancellable>()
     private var viewModel = LoginViewModel()
     private var nickname: String? = nil
+    private let textSubject = PassthroughSubject<String, Never>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,7 +142,7 @@ class LoginViewController: UIViewController {
             .textPublisher
             .receive(on: RunLoop.main)
             .map { $0 ?? "" }
-            .assign(to: \.idTextInput, 
+            .assign(to: \.idTextInput,
                     on: viewModel)
             .store(in: &anyCancellables)
         passwordTextField
@@ -151,6 +159,14 @@ class LoginViewController: UIViewController {
             .assign(to: \.isEnabled,
                     on: loginButton)
             .store(in: &anyCancellables)
+
+        textSubject
+            .print()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] text in
+                self?.changeTextLabel.text = text
+            }
+            .store(in: &anyCancellables)
     }
 
     private func setLayout() {
@@ -163,7 +179,8 @@ class LoginViewController: UIViewController {
             findPasswordButton,
             divider,
             helpLabel,
-            nicknameButton
+            nicknameButton,
+            changeTextLabel
         ].forEach { self.view.addSubview($0) }
     }
 
@@ -223,6 +240,11 @@ class LoginViewController: UIViewController {
             $0.leading.equalTo(helpLabel.snp.trailing).offset(34)
             $0.height.equalTo(22)
         }
+
+        changeTextLabel.snp.makeConstraints {
+            $0.top.equalTo(helpLabel.snp.bottom).offset(20)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+        }
     }
 
 }
@@ -258,13 +280,23 @@ extension LoginViewController {
     }
 
     @objc func nicknameButtonTapped(_ sender: UIButton) {
-        let nicenameViewController = NicknameViewController()
-        if let sheet = nicenameViewController.sheetPresentationController {
-            sheet.detents = [.medium()]
+        let nicknameViewController = NicknameViewController()
+        let nicknameSheetHeight = UISheetPresentationController.Detent.custom { _ in
+            return 300
+        }
+        if let sheet = nicknameViewController.sheetPresentationController {
+            sheet.detents = [nicknameSheetHeight]
             sheet.prefersGrabberVisible = true
         }
-        nicenameViewController.delegate = self
-        self.present(nicenameViewController, animated: true)
+        nicknameViewController.delegate = self
+        nicknameViewController
+            .textPublisher
+            .print()
+            .sink { [weak self] text in
+                self?.textSubject.send(text)
+            }
+            .store(in: &anyCancellables)
+        self.present(nicknameViewController, animated: true)
     }
 }
 

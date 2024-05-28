@@ -16,6 +16,8 @@
 		AF10B3C92BC6AAD1001AFDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF10B3C82BC6AAD1001AFDF7 /* Assets.xcassets */; };
 		AF10B3CC2BC6AAD1001AFDF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF10B3CA2BC6AAD1001AFDF7 /* LaunchScreen.storyboard */; };
 		AF3616712BCD6B890019185A /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3616702BCD6B890019185A /* UITextField+.swift */; };
+		AF3D63E02BECBCFB00E442CF /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = AF3D63DF2BECBCFB00E442CF /* CombineCocoa */; };
+		AF3D63E32BECBE6200E442CF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D63E22BECBE6200E442CF /* LoginViewModel.swift */; };
 		AF6832A42BCCF28600932406 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AF6832A32BCCF28600932406 /* SnapKit */; };
 		AF6832A62BCCF28600932406 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = AF6832A52BCCF28600932406 /* SnapKit-Dynamic */; };
 		AF6832B62BCCF39400932406 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6832B52BCCF39400932406 /* UIColor+.swift */; };
@@ -85,6 +87,7 @@
 		AF10B3CB2BC6AAD1001AFDF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF10B3CD2BC6AAD1001AFDF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF3616702BCD6B890019185A /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		AF3D63E22BECBE6200E442CF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AF6832B52BCCF39400932406 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		AF6832B72BCCF4EC00932406 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		AF6832D42BCCF7BD00932406 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -133,6 +136,7 @@
 				AF6832A42BCCF28600932406 /* SnapKit in Frameworks */,
 				AFA9ED4B2BDFA290009A5C59 /* LookinServer in Frameworks */,
 				AF7A0C002BE8B0E500A9885C /* Moya in Frameworks */,
+				AF3D63E02BECBCFB00E442CF /* CombineCocoa in Frameworks */,
 				AF6832A62BCCF28600932406 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +163,7 @@
 		AF10B3BE2BC6AACF001AFDF7 /* 34th-Sopt-Assignment */ = {
 			isa = PBXGroup;
 			children = (
+				AF3D63E12BECBE5400E442CF /* ViewModel */,
 				AF7A0C012BE8B13F00A9885C /* Network */,
 				AFA9ED8F2BE0DED7009A5C59 /* Resources */,
 				AFA9ED8E2BE0DEC1009A5C59 /* Application */,
@@ -170,6 +175,14 @@
 			path = "34th-Sopt-Assignment";
 			sourceTree = "<group>";
 		};
+		AF3D63E12BECBE5400E442CF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF3D63E22BECBE6200E442CF /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		AF492DE82BCD207F00FA0FCA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,8 +190,8 @@
 				AFA9ED442BDF9CEA009A5C59 /* Cell */,
 				AFD10AED2BDBA4950073F57D /* HomeViewController.swift */,
 				AF10B3C32BC6AACF001AFDF7 /* LoginViewController.swift */,
-				AF6832F02BCD12A900932406 /* WelcomeViewController.swift */,
 				AFDC38E42BCD19C9007937E6 /* NicknameViewController.swift */,
+				AF6832F02BCD12A900932406 /* WelcomeViewController.swift */,
 				AF7A0C142BE8B91200A9885C /* MovieListViewController.swift */,
 			);
 			path = ViewController;
@@ -313,6 +326,7 @@
 				AF6832A52BCCF28600932406 /* SnapKit-Dynamic */,
 				AFA9ED4A2BDFA290009A5C59 /* LookinServer */,
 				AF7A0BFF2BE8B0E500A9885C /* Moya */,
+				AF3D63DF2BECBCFB00E442CF /* CombineCocoa */,
 			);
 			productName = "34th-Sopt-Assignment";
 			productReference = AF10B3BC2BC6AACF001AFDF7 /* 34th-Sopt-Assignment.app */;
@@ -346,6 +360,7 @@
 				AF6832A22BCCF28600932406 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AFA9ED492BDFA290009A5C59 /* XCRemoteSwiftPackageReference "LookinServer" */,
 				AF7A0BFE2BE8B0E500A9885C /* XCRemoteSwiftPackageReference "Moya" */,
+				AF3D63DE2BECBCFB00E442CF /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 			);
 			productRefGroup = AF10B3BD2BC6AACF001AFDF7 /* Products */;
 			projectDirPath = "";
@@ -391,6 +406,7 @@
 				AF6832E72BCCFC6500932406 /* UIButton+.swift in Sources */,
 				AF7A0C0B2BE8B4B100A9885C /* MovieService.swift in Sources */,
 				AF6832F12BCD12A900932406 /* WelcomeViewController.swift in Sources */,
+				AF3D63E32BECBE6200E442CF /* LoginViewModel.swift in Sources */,
 				AF018FC02BE8C4DD00DB2C0B /* MoyaProvider+.swift in Sources */,
 				AF3616712BCD6B890019185A /* UITextField+.swift in Sources */,
 				AFD10AEE2BDBA4950073F57D /* HomeViewController.swift in Sources */,
@@ -644,6 +660,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF3D63DE2BECBCFB00E442CF /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
 		AF6832A22BCCF28600932406 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -671,6 +695,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF3D63DF2BECBCFB00E442CF /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF3D63DE2BECBCFB00E442CF /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
+		};
 		AF6832A32BCCF28600932406 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF6832A22BCCF28600932406 /* XCRemoteSwiftPackageReference "SnapKit" */;
